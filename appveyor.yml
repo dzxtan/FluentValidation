@@ -16,6 +16,9 @@ install:
        iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
        dotnet "appveyor-tools/secure-file.dll" -decrypt src/FluentValidation-Release.snk.enc -secret $ENV:kek
      }
+     # Make sure the latest dotnet SDK is installed.
+     # Appveyor usually lag behind the latest by a bit.
+     iex ((New-Object Net.WebClient).DownloadString('https://dot.net/v1/dotnet-install.ps1'))
 
 build_script:
  - ps: ./build.ps1
